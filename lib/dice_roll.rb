@@ -2,7 +2,7 @@ def roll_dice(eye_on_the_dices)
     #eye_on_the_dices = [rand(1..6),rand(1..6) ,rand(1..6)]
     # p eye_on_the_dices
     eye_on_the_dices.sort!
-    dice_hand = '役なし'
+    dice_hand = '目なし'
 
     if eye_on_the_dices === [1,1,1] then
         dice_hand = 'ピンゾロ'
