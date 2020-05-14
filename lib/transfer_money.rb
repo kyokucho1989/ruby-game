@@ -1,6 +1,3 @@
-
-
-
 class Player
   attr_reader :name
   attr_accessor :money,:bet_money,:hand
@@ -12,10 +9,7 @@ class Player
   end
 
   def check_win_lose(opponent)
-    # puts <<~TEXT
-    # 自分の役： #{@hand}
-    # 相手の役： #{opponent.hand}
-    # TEXT
+
     strength_relationship = [
       'ヒフミ','目なし',
       '通常の目(1)','通常の目(2)','通常の目(3)',
@@ -35,11 +29,7 @@ class Player
   end
 
   def transfer_money(opponent,win_or_lose)
-
-    puts <<~TEXT
-    自分の役： #{@hand} / 相手の役： #{opponent.hand}
-    TEXT
-    
+  
     strength_relationship = [
       'ヒフミ','目なし',
       '通常の目(1)','通常の目(2)','通常の目(3)',
@@ -57,7 +47,19 @@ class Player
     my_dividend_ratio = dividend_table[my_hand_rank]
     opponent_dividend_ratio = dividend_table[opponent_hand_rank]
     move_money = 0
-
+    if @hand == 'ヒフミ' || opponent.hand == 'ヒフミ' then
+      if @hand == 'ヒフミ' && (opponent.hand != 'シゴロ' && opponent.hand != 'ゾロ目' && opponent.hand != 'ピンゾロ') then
+        opponent_dividend_ratio = 2
+      end
+      if @hand == '目なし' && (opponent.hand == 'ヒフミ') then
+        my_dividend_ratio = 2
+      end
+      if (@hand != 'シゴロ' && @hand != 'ゾロ目' && @hand != 'ピンゾロ') && opponent.hand  == 'ヒフミ' then
+        opponent_dividend_ratio = 2
+        my_dividend_ratio = 2
+      end
+    end
+    
     case win_or_lose
     when '勝ち'
       move_money = my_dividend_ratio * bet_money
@@ -73,54 +75,32 @@ class Player
       end
     end
 
+    puts <<~TEXT
+    自分： #{@hand} / 相手： #{opponent.hand} / #{win_or_lose} ... #{move_money}ペリカ
+    TEXT
     move_money
-    #  # puts '勝ち'
-    #   move_money = my_dividend_ratio * bet_money
-    #   @money += move_money
-    #   opponent.money -= move_money
 
-    # elsif(my_hand_rank == opponent_hand_rank)
-    #  # puts '引き分け'
-    # else
-    #  # puts '負け'
-    #   move_money = opponent_dividend_ratio * opponent.bet_money
-    #   @money -= move_money
-    #   opponent.money += move_money
-    # end
   end
 end
 
 
 player_A = Player.new(money:1000,bet_money:100,hand:'目なし',name:'カイジ')
-player_B = Player.new(money:1000,bet_money:100,hand:'目なし',name:'班長')
+player_B = Player.new(money:3000,bet_money:300,hand:'目なし',name:'班長')
+puts <<~TEXT
+名前： #{player_A.name} 
+　所持金:#{player_A.money} ペリカ
+　賭け金：#{player_A.bet_money} ペリカ
+　役： #{player_A.hand}
+--------------------------
+名前： #{player_B.name} 
+　所持金:#{player_B.money} ペリカ
+　賭け金：#{player_B.bet_money} ペリカ
+　役： #{player_B.hand}
+TEXT
+
+p player_A.check_win_lose(player_B)
 
 #player_A.bet_money = 300
 #player_A.money = 3090
  player_A.hand = '目なし'
  player_B.hand = 'ピンゾロ'
-# puts <<~TEXT
-# 名前： #{player_A.name}
-# 所持金： #{player_A.money}ペリカ
-# bet： #{player_A.bet_money}ペリカ
-# 役： #{player_A.hand}
-# TEXT
-# puts <<~TEXT
-# 名前： #{player_B.name}
-# 所持金： #{player_B.money}ペリカ
-# bet： #{player_B.bet_money}ペリカ
-# 役： #{player_B.hand}
-# TEXT
- #player_A.transfer_money(player_B,'負け')
-#p player_A.transfer_money(player_B)
-# p player_A.check_win_lose(player_B)
-
-# puts '----------------'
-# puts <<TEXT
-# 名前： #{player_A.name}
-# 所持金： #{player_A.money}ペリカ
-# TEXT
-
-# puts <<TEXT
-# 名前： #{player_B.name}
-# 所持金： #{player_B.money}ペリカ
-# TEXT

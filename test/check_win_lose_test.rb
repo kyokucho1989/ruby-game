@@ -33,7 +33,6 @@ class DiceTest < Minitest::Test
     end
     # player_A.hand = roll_map[0]
     # player_B.hand = roll_map[1]
-    # #p win_lose_map[0][1]
     # assert_equal win_lose_map[0][1], player_A.check_win_lose(player_B)
   end
 end
