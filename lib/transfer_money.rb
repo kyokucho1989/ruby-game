@@ -18,11 +18,12 @@ class Player
     ]
     my_hand_rank = strength_relationship.index(@hand)
     opponent_hand_rank = strength_relationship.index(opponent.hand)
-
+    puts '勝敗...'
     if(my_hand_rank > opponent_hand_rank)
-       '勝ち' 
+      puts '勝ち'
+      '勝ち' 
      elsif(my_hand_rank == opponent_hand_rank)
-       '引き分け'
+      '引き分け'
      else
        '負け'
      end
