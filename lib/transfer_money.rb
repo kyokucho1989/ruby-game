@@ -18,11 +18,12 @@ class Player
     ]
     my_hand_rank = strength_relationship.index(@hand)
     opponent_hand_rank = strength_relationship.index(opponent.hand)
-
+    puts '勝敗...'
     if(my_hand_rank > opponent_hand_rank)
-       '勝ち' 
+      puts '勝ち'
+      '勝ち' 
      elsif(my_hand_rank == opponent_hand_rank)
-       '引き分け'
+      '引き分け'
      else
        '負け'
      end
@@ -62,7 +63,7 @@ class Player
     
     case win_or_lose
     when '勝ち'
-      move_money = my_dividend_ratio * bet_money
+      move_money = my_dividend_ratio * @bet_money
       if move_money < 0 
         move_money = 0
       end
@@ -84,23 +85,23 @@ class Player
 end
 
 
-player_A = Player.new(money:1000,bet_money:100,hand:'目なし',name:'カイジ')
-player_B = Player.new(money:3000,bet_money:300,hand:'目なし',name:'班長')
-puts <<~TEXT
-名前： #{player_A.name} 
-　所持金:#{player_A.money} ペリカ
-　賭け金：#{player_A.bet_money} ペリカ
-　役： #{player_A.hand}
---------------------------
-名前： #{player_B.name} 
-　所持金:#{player_B.money} ペリカ
-　賭け金：#{player_B.bet_money} ペリカ
-　役： #{player_B.hand}
-TEXT
+# player_A = Player.new(money:1000,bet_money:100,hand:'目なし',name:'カイジ')
+# player_B = Player.new(money:3000,bet_money:300,hand:'目なし',name:'班長')
+# puts <<~TEXT
+# 名前： #{player_A.name} 
+# 　所持金:#{player_A.money} ペリカ
+# 　賭け金：#{player_A.bet_money} ペリカ
+# 　役： #{player_A.hand}
+# --------------------------
+# 名前： #{player_B.name} 
+# 　所持金:#{player_B.money} ペリカ
+# 　賭け金：#{player_B.bet_money} ペリカ
+# 　役： #{player_B.hand}
+# TEXT
 
-p player_A.check_win_lose(player_B)
+# p player_A.check_win_lose(player_B)
 
-#player_A.bet_money = 300
-#player_A.money = 3090
- player_A.hand = '目なし'
- player_B.hand = 'ピンゾロ'
+# #player_A.bet_money = 300
+# #player_A.money = 3090
+#  player_A.hand = '目なし'
+#  player_B.hand = 'ピンゾロ'

@@ -1,4 +1,5 @@
-def roll_dice(eye_on_the_dices)
+# def roll_dice()
+def roll_dice(eye_on_the_dices) 
     #eye_on_the_dices = [rand(1..6),rand(1..6) ,rand(1..6)]
     # p eye_on_the_dices
     eye_on_the_dices.sort!
