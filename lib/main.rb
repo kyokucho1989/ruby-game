@@ -4,17 +4,36 @@ require './dice_roll'
 
 # 親を決める（はじめは班長から）
 
-player_A = Player.new(money:1000,bet_money:100,name:'カイジ')
-player_B = Player.new(money:3000,bet_money:300,name:'班長')
-
+player_A = Player.new(money:1000,name:'カイジ')
+player_B = Player.new(money:1000,name:'班長')
+puts '---チンチロゲーム---'
 loop do
+    # 掛け金の設定（相手）
+        bet_money_B = rand(1..4) * 200
+        player_B.bet_money = player_B.money < bet_money_B ? player_B.money : bet_money_B
+        
+    # 掛け金の設定（自分）
+
+
     while true
-        puts '掛け金を入力してください'
-        bet_money = gets
-        if bet_money =~ /^[0-9]+$/
-            break
+        puts '掛け金を入力してください （終了するにはexitを入力）'
+        bet_money = gets.chomp
+        
+        if bet_money == "exit"
+            puts '終了'
+            exit
+        end
+        if bet_money =~ /^[0-9]+$/ 
+            if bet_money.to_i > player_A.money
+                puts '所持金より多い金額は賭けられません'
+            elsif bet_money.to_i == 0
+                puts '0は無効です'
+            else
+                player_A.bet_money = bet_money.to_i
+                break
+            end
         else
-            puts '整数で入力してください'
+            puts '正の整数で入力してください'
         end
     end
     puts <<~TEXT
@@ -29,9 +48,7 @@ loop do
     press enter
     TEXT
     teisi = gets
-    # 掛け金の設定（自分）
 
-    # 相手は勝手に決める
     # サイコロを振る
     eye_on_the_dices1 = [rand(1..6),rand(1..6),rand(1..6)]
     eye_on_the_dices2 = [rand(1..6),rand(1..6),rand(1..6)]
@@ -61,14 +78,16 @@ loop do
     puts <<~TEXT
     名前： #{player_A.name} 
     　所持金:#{player_A.money} ペリカ
-    　賭け金：#{player_A.bet_money} ペリカ
     -
     名前： #{player_B.name} 
     　所持金:#{player_B.money} ペリカ
-    　賭け金：#{player_B.bet_money} ペリカ
     --------------------------
     TEXT
-    if player_A.money <= 0 || player_B.money <= 0
+    if player_A.money <= 0
+        puts '所持金ゼロ。負けました…'  
+        break
+    elsif player_B.money <= 0
+        puts '勝ちました！'
         break
     end
     # 勝敗がつくまでループ
