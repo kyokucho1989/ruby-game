@@ -69,7 +69,7 @@ loop do
     teisi = gets
     # 勝敗判定
     win_or_lose = player_A.check_win_lose(player_B)
-    # win_or_lose
+
     # 掛け金の移動
     move_money = player_A.transfer_money(player_B,win_or_lose)
     player_A.money += move_money

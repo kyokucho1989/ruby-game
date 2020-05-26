@@ -1,7 +1,4 @@
-# def roll_dice()
 def roll_dice(eye_on_the_dices) 
-    #eye_on_the_dices = [rand(1..6),rand(1..6) ,rand(1..6)]
-    # p eye_on_the_dices
     eye_on_the_dices.sort!
     dice_hand = '目なし'
 
@@ -23,14 +20,11 @@ def roll_dice(eye_on_the_dices)
         
         uniq_value = uniq_array.values.flatten.first
         #取り出した要素を抽出 ex. uniq_array ={5=>[5]}
-        #p uniq_value
+  
         dice_hand = '通常の目(' + uniq_value.to_s + ')'
     else 
         dice_hand = '目なし'
     end
     
-    #{eye: eye_on_the_dices, hand: dice_hand}
     dice_hand
 end
-
-#p roll_dice([rand(1..6),rand(1..6) ,rand(1..6)])

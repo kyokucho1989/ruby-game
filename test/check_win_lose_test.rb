@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require './lib/transfer_money'
+require './lib/player_class'
 class DiceTest < Minitest::Test
   def test_win_lose
     roll_map = [
