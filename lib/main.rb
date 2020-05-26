@@ -1,4 +1,4 @@
-require './transfer_money'
+require './player_class'
 require './dice_roll'
 # チンチロ　ゲームの流れ
 
