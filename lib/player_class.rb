@@ -83,25 +83,3 @@ class Player
 
   end
 end
-
-
-# player_A = Player.new(money:1000,bet_money:100,hand:'目なし',name:'カイジ')
-# player_B = Player.new(money:3000,bet_money:300,hand:'目なし',name:'班長')
-# puts <<~TEXT
-# 名前： #{player_A.name} 
-# 　所持金:#{player_A.money} ペリカ
-# 　賭け金：#{player_A.bet_money} ペリカ
-# 　役： #{player_A.hand}
-# --------------------------
-# 名前： #{player_B.name} 
-# 　所持金:#{player_B.money} ペリカ
-# 　賭け金：#{player_B.bet_money} ペリカ
-# 　役： #{player_B.hand}
-# TEXT
-
-# p player_A.check_win_lose(player_B)
-
-# #player_A.bet_money = 300
-# #player_A.money = 3090
-#  player_A.hand = '目なし'
-#  player_B.hand = 'ピンゾロ'
