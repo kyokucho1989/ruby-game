@@ -1,15 +1,15 @@
-def roll_dice(eye_on_the_dices) 
+require './lib/module-hand-game'
+def roll_dice(eye_on_the_dices = [rand(1..6),rand(1..6),rand(1..6)]) 
   eye_on_the_dices.sort!
-  dice_hand = '目なし'
-
+  dice_hand = Hand::MENASHI
   if eye_on_the_dices == [1,1,1] 
-      dice_hand = 'ピンゾロ'
+    dice_hand = Hand::PINZORO
   elsif eye_on_the_dices == [1,2,3]
-      dice_hand = 'ヒフミ'
+    dice_hand = Hand::HIFUMI 
   elsif eye_on_the_dices == [4,5,6] 
-      dice_hand = 'シゴロ'
+    dice_hand = Hand::SHIGORO
   elsif eye_on_the_dices.uniq.size == 1
-      dice_hand = 'ゾロ目'
+    dice_hand = Hand::ZOROME 
   elsif eye_on_the_dices.uniq.size == 2
         
     group_eye_dices = eye_on_the_dices.group_by{|value|value} 
@@ -21,10 +21,10 @@ def roll_dice(eye_on_the_dices)
     uniq_value = uniq_array.values.flatten.first
     #取り出した要素を抽出 ex. uniq_array ={5=>[5]}
 
-    dice_hand = "通常の目(#{uniq_value.to_s})"
+    dice_hand = Hand::NORMAL[uniq_value.to_i]
   else 
-    dice_hand = '目なし'
+    dice_hand = Hand::MENASHI
+
   end
-    
-    dice_hand
+    {hand: dice_hand, dices:eye_on_the_dices}
 end

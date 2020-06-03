@@ -1,11 +1,14 @@
-require './player_class'
-require './dice_roll'
+require './lib/player_class'
+require './lib/game_class'
+require './lib/dice_roll'
+require './lib/message'
 # チンチロ　ゲームの流れ
 
 # 親を決める（はじめは班長から）
 
 player_A = Player.new(money: 1000, name: 'カイジ')
 player_B = Player.new(money: 1000, name: '班長')
+game = Game.new
 puts '---チンチロゲーム---'
 loop do
   # 掛け金の設定（相手）
@@ -34,42 +37,31 @@ loop do
       puts '正の整数で入力してください'
     end
   end
-  puts <<~TEXT
-  名前： #{player_A.name} 
-  　所持金:#{player_A.money} ペリカ
-  　賭け金：#{player_A.bet_money} ペリカ
-  -
-  名前： #{player_B.name} 
-  　所持金:#{player_B.money} ペリカ
-  　賭け金：#{player_B.bet_money} ペリカ
 
-  press enter
-  TEXT
-  teisi = gets
+  show_status(player_A,player_B)
+
 
   # サイコロを振る
-  eye_on_the_dices1 = [rand(1..6),rand(1..6),rand(1..6)]
-  eye_on_the_dices2 = [rand(1..6),rand(1..6),rand(1..6)]
-  player_A.hand = roll_dice(eye_on_the_dices1)
-  player_B.hand = roll_dice(eye_on_the_dices2)
+
+  player_A_hand_dices = roll_dice()
+  player_A.hand = player_A_hand_dices[:hand]
+  player_A.dices = player_A_hand_dices[:dices]
+
+  player_B_hand_dices = roll_dice()
+  player_B.hand = player_B_hand_dices[:hand]
+  player_B.dices= player_B_hand_dices[:dices]
+  
   # 出た目の確認・役の決定
-  puts <<~TEXT
-  名前： #{player_A.name} 
-  出目  #{eye_on_the_dices1}
-  　役： #{player_A.hand}
-  -
-  名前： #{player_B.name}
-  出目  #{eye_on_the_dices2} 
-  　役： #{player_B.hand}
 
-  press enter
-  TEXT
-  teisi = gets
+  show_hands(player_A,player_B)
+ 
   # 勝敗判定
-  win_or_lose = player_A.check_win_lose(player_B)
-
+  # win_or_lose = player_A.check_win_lose(player_B)
+  win_or_lose = game.check_win_lose(player_A,player_B)
+  
   # 掛け金の移動
-  move_money = player_A.transfer_money(player_B,win_or_lose)
+  # move_money = player_A.transfer_money(player_B,win_or_lose)
+  move_money = game.transfer_money(player_A, player_B,win_or_lose)
   player_A.money += move_money
   player_B.money -= move_money
 
