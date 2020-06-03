@@ -12,7 +12,7 @@ game = Game.new
 puts '---チンチロゲーム---'
 loop do
   # 掛け金の設定（相手）
-      bet_money_B = rand(1..4) * 200
+      bet_money_B = player_B.money * rand(80..100) /100
       player_B.bet_money = player_B.money < bet_money_B ? player_B.money : bet_money_B
       
   # 掛け金の設定（自分）
@@ -62,17 +62,13 @@ loop do
   # 掛け金の移動
   # move_money = player_A.transfer_money(player_B,win_or_lose)
   move_money = game.transfer_money(player_A, player_B,win_or_lose)
+  show_result(player_A, player_B,win_or_lose,move_money)
+  
   player_A.money += move_money
   player_B.money -= move_money
 
-  puts <<~TEXT
-  名前： #{player_A.name} 
-  　所持金:#{player_A.money} ペリカ
-  -
-  名前： #{player_B.name} 
-  　所持金:#{player_B.money} ペリカ
-  --------------------------
-  TEXT
+  show_money(player_A,player_B)
+
   if player_A.money <= 0
     puts '所持金ゼロ。負けました…'  
     break
