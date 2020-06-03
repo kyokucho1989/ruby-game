@@ -9,7 +9,7 @@ class Game
     strength_relationship = Hand::STRENGTH_RANK
     my_hand_rank = strength_relationship.index(player_A.hand)
     opponent_hand_rank = strength_relationship.index(opponent.hand)
-    puts '勝敗...'
+    
     if(my_hand_rank > opponent_hand_rank)
       Match::WIN 
      elsif(my_hand_rank == opponent_hand_rank)
@@ -63,9 +63,9 @@ class Game
       end
     end
 
-    puts <<~TEXT
-    自分： #{my_hand} / 相手： #{opponent.hand} / #{win_or_lose} ... #{move_money}ペリカ
-    TEXT
+    # puts <<~TEXT
+    # 自分： #{my_hand} / 相手： #{opponent.hand} / #{win_or_lose} ... #{move_money}ペリカ
+    # TEXT
     move_money
 
   end

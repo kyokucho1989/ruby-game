@@ -32,3 +32,25 @@ def show_hands(player_A, player_B)
   TEXT
   teisi = gets
 end
+
+def show_result(player_A, player_B,win_or_lose,move_money)
+  puts <<~TEXT
+  自分： #{player_A.hand} / 相手： #{player_B.hand} /
+  勝敗... #{win_or_lose}  ... #{move_money}ペリカ
+  TEXT
+end
+
+def show_money(player_A, player_B)
+
+  puts <<~TEXT
+  名前： #{player_A.name} 
+  　所持金:#{player_A.money} ペリカ
+  -
+  名前： #{player_B.name} 
+  　所持金:#{player_B.money} ペリカ
+  --------------------------
+  press enter
+  TEXT
+  teisi = gets
+end
+
