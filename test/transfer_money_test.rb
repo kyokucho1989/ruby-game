@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require './lib/player_class'
+require './lib/game_class'
 class DiceTest < Minitest::Test
   def test_transfer_money
     roll_map = [
@@ -42,6 +43,7 @@ class DiceTest < Minitest::Test
     ]
     player_A = Player.new(money:1000,bet_money:100,hand:'目なし',name:'カイジ')
     player_B = Player.new(money:1000,bet_money:300,hand:'目なし',name:'班長')
+    game = Game.new
     new_bet_map = bet_map.map { |x|
       x.map { |y| 
         if y > 0
@@ -56,11 +58,12 @@ class DiceTest < Minitest::Test
 
     #new_bet_map.each {|x| puts x.join(" ")}
 
-    roll_map.each_with_index do |value_1,i|
+    roll_map.each_with_index do |value_1, i|
       player_A.hand = value_1
-      roll_map.each_with_index do |value_2,j|
+      roll_map.each_with_index do |value_2, j|
         player_B.hand = value_2
-        assert_equal new_bet_map[i][j], player_A.transfer_money(player_B,win_lose_map[i][j])
+        # assert_equal new_bet_map[i][j], player_A.transfer_money(player_B,win_lose_map[i][j])
+        assert_equal new_bet_map[i][j], game.transfer_money(player_A,player_B,win_lose_map[i][j])
       end
     end
 
