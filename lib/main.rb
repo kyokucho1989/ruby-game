@@ -1,4 +1,4 @@
-require './lib/player_class'
+require './lib/player_dealer_class'
 require './lib/game_class'
 require './lib/dice_roll'
 require './lib/message'
@@ -7,36 +7,19 @@ require './lib/message'
 # 親を決める（はじめは班長から）
 
 player_A = Player.new(money: 1000, name: 'カイジ')
-player_B = Player.new(money: 1000, name: '班長')
+player_B = Dealer.new(money: 1000, name: '班長')
 game = Game.new
 puts '---チンチロゲーム---'
 loop do
   # 掛け金の設定（相手）
-      bet_money_B = player_B.money * rand(80..100) /100
-      player_B.bet_money = player_B.money < bet_money_B ? player_B.money : bet_money_B
-      
+    # bet_money_B = player_B.money * rand(80..100) /100
+    # player_B.bet_money = player_B.money < bet_money_B ? player_B.money : bet_money_B
+
+  player_B.set_bet_money()
+
   # 掛け金の設定（自分）
-  while true
-    puts '掛け金を入力してください （終了するにはexitを入力）'
-    bet_money = gets.chomp
-    
-    if bet_money == "exit"
-      puts '終了'
-      exit
-    end
-    if bet_money =~ /^[0-9]+$/ 
-      if bet_money.to_i > player_A.money
-        puts '所持金より多い金額は賭けられません'
-      elsif bet_money.to_i == 0
-        puts '0は無効です'
-      else
-        player_A.bet_money = bet_money.to_i
-        break
-      end
-    else
-      puts '正の整数で入力してください'
-    end
-  end
+  player_A.set_bet_money()
+
 
   show_status(player_A,player_B)
 

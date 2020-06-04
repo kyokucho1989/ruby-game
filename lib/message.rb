@@ -1,4 +1,4 @@
-require './lib/player_class'
+require './lib/player_dealer_class'
 require './lib/module-hand-game'
 
 # ステータス表示
