@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require './lib/player_class'
+require './lib/player_dealer_class'
 require './lib/game_class'
 class DiceTest < Minitest::Test
   def test_win_lose
@@ -24,13 +24,12 @@ class DiceTest < Minitest::Test
     ]
     
     player_A = Player.new(hand: '目なし', name: 'カイジ')
-    player_B = Player.new(hand: '目なし', name: '班長')
+    player_B = Dealer.new(hand: '目なし', name: '班長')
     game = Game.new
     roll_map.each_with_index do |value_1, i|
       player_A.hand = value_1
       roll_map.each_with_index do |value_2, j|
         player_B.hand = value_2
-        # assert_equal win_lose_map[i][j], player_A.check_win_lose(player_B)
         assert_equal win_lose_map[i][j], game.check_win_lose(player_A,player_B)
         
       end
