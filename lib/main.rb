@@ -12,38 +12,28 @@ game = Game.new
 puts '---チンチロゲーム---'
 loop do
   # 掛け金の設定（相手）
-    # bet_money_B = player_B.money * rand(80..100) /100
-    # player_B.bet_money = player_B.money < bet_money_B ? player_B.money : bet_money_B
 
   player_B.set_bet_money()
 
   # 掛け金の設定（自分）
   player_A.set_bet_money()
 
-
+  # 賭け金の表示
   show_status(player_A,player_B)
 
 
   # サイコロを振る
+  player_A.roll_dice()
+  player_B.roll_dice()
 
-  player_A_hand_dices = roll_dice()
-  player_A.hand = player_A_hand_dices[:hand]
-  player_A.dices = player_A_hand_dices[:dices]
-
-  player_B_hand_dices = roll_dice()
-  player_B.hand = player_B_hand_dices[:hand]
-  player_B.dices= player_B_hand_dices[:dices]
-  
   # 出た目の確認・役の決定
 
   show_hands(player_A,player_B)
  
   # 勝敗判定
-  # win_or_lose = player_A.check_win_lose(player_B)
   win_or_lose = game.check_win_lose(player_A,player_B)
   
   # 掛け金の移動
-  # move_money = player_A.transfer_money(player_B,win_or_lose)
   move_money = game.transfer_money(player_A, player_B,win_or_lose)
   show_result(player_A, player_B,win_or_lose,move_money)
   
