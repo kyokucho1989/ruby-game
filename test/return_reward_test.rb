@@ -1,5 +1,6 @@
 require 'minitest/autorun'
-require './lib/player_dealer_class'
+require './lib/player_class'
+require './lib/dealer_class'
 require './lib/game_class'
 class DiceTest < Minitest::Test
   def test_transfer_money
@@ -63,7 +64,7 @@ class DiceTest < Minitest::Test
       roll_map.each_with_index do |value_2, j|
         player_B.hand = value_2
   
-        assert_equal new_bet_map[i][j], game.transfer_money(player_A,player_B,win_lose_map[i][j])
+        assert_equal new_bet_map[i][j], game.return_reward(player_A,player_B,win_lose_map[i][j])
       end
     end
 
