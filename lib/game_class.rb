@@ -1,8 +1,6 @@
 require './lib/module-hand-game'
+require './lib/message'
 class Game
-  def initialize(**params)
-
-  end
 
   def check_win_lose(player_A,opponent)
 
@@ -19,7 +17,7 @@ class Game
      end
   end
 
-  def transfer_money(player_A,opponent,win_or_lose)
+  def return_reward(player_A,opponent,win_or_lose)
     my_hand = player_A.hand
     my_bet_money = player_A.bet_money
     strength_relationship = Hand::STRENGTH_RANK
@@ -63,10 +61,20 @@ class Game
       end
     end
 
-    # puts <<~TEXT
-    # 自分： #{my_hand} / 相手： #{opponent.hand} / #{win_or_lose} ... #{move_money}ペリカ
-    # TEXT
     move_money
 
+  end
+
+  def confirm_money(player_A, player_B)
+    # 返り値 = 所持金があるかどうか
+    if player_A.money <= 0
+        lose_message
+        false
+      elsif player_B.money <= 0
+        win_message
+        false
+      else
+        true
+    end
   end
 end

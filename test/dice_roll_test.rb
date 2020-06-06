@@ -1,5 +1,6 @@
 require 'minitest/autorun'
-require './lib/player_dealer_class'
+require './lib/player_class'
+require './lib/dealer_class'
 class DiceTest < Minitest::Test
 
   def test_dice

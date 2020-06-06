@@ -1,4 +1,5 @@
-require './lib/player_dealer_class'
+require './lib/player_class'
+require './lib/dealer_class'
 require './lib/module-hand-game'
 
 # ステータス表示
@@ -49,8 +50,18 @@ def show_money(player_A, player_B)
   名前： #{player_B.name} 
   　所持金:#{player_B.money} ペリカ
   --------------------------
-  press enter
   TEXT
-  teisi = gets
+end
+
+def win_message
+  puts <<~TEXT
+　勝ちました！
+  TEXT
+end
+
+def lose_message
+  puts <<~TEXT
+　所持金ゼロ...　負けました
+  TEXT
 end
 
