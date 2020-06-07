@@ -2,7 +2,7 @@ require './lib/module-hand-game'
 require './lib/message'
 class Game
 
-  def check_win_lose(player_A,opponent)
+  def self.check_win_lose(player_A,opponent)
 
     strength_relationship = Hand::STRENGTH_RANK
     my_hand_rank = strength_relationship.index(player_A.hand)
@@ -17,7 +17,7 @@ class Game
      end
   end
 
-  def return_reward(player_A,opponent,win_or_lose)
+  def self.return_reward(player_A,opponent,win_or_lose)
     my_hand = player_A.hand
     my_bet_money = player_A.bet_money
     strength_relationship = Hand::STRENGTH_RANK
@@ -65,7 +65,7 @@ class Game
 
   end
 
-  def confirm_money(player_A, player_B)
+  def self.confirm_money(player_A, player_B)
     # 返り値 = 所持金があるかどうか
     if player_A.money <= 0
         lose_message
