@@ -8,9 +8,10 @@ require './lib/message'
 
 player_A = Player.new(money: 1000, name: 'カイジ')
 player_B = Dealer.new(money: 1000, name: '班長')
+show_money(player_A,player_B)
 puts '---チンチロゲーム---'
 loop do
-  show_money(player_A,player_B)
+
   # 掛け金の設定（相手）
 
   player_B.set_bet_money
@@ -18,9 +19,7 @@ loop do
   # 掛け金の設定（自分）
   is_input_exit = player_A.set_bet_money
 
-  if is_input_exit == true
-    break #賭け金で「exit」が入力されたらゲーム終了
-  end
+  break if is_input_exit
 
   # 賭け金の表示
   show_status(player_A,player_B)
@@ -44,7 +43,7 @@ loop do
   player_A.money += move_money
   player_B.money -= move_money
 
-
+  show_money(player_A,player_B)
 
   # 所持金チェック 両者とも0じゃないならループする
   exists_money = Game.confirm_money(player_A, player_B)
