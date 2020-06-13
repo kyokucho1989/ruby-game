@@ -4,7 +4,7 @@ require './lib/game_class'
 require './lib/message'
 # チンチロ　ゲームの流れ
 
-# 親を決める（はじめは班長から）
+# プレイヤー作成
 
 player_A = Player.new(money: 1000, name: 'カイジ')
 player_B = Dealer.new(money: 1000, name: '班長')
@@ -47,10 +47,8 @@ loop do
 
   # 所持金チェック 両者とも0じゃないならループする
   exists_money = Game.confirm_money(player_A, player_B)
-  if exists_money == false
-    #　ゲーム終了
-    break
-  end
+   #　ゲーム終了
+  break if !exists_money
 
   # 勝敗がつくまでループ
 end
